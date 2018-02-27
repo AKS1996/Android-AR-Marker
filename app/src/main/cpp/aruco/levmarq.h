@@ -28,8 +28,6 @@ or implied, of Rafael Muñoz Salinas.
 
 #ifndef ARUCO_MM__LevMarq_H
 #define ARUCO_MM__LevMarq_H
-#include <Eigen/Core>
-#include <Eigen/Cholesky>
 #include <functional>
 #include <iostream>
 #include <cmath>
@@ -38,7 +36,7 @@ or implied, of Rafael Muñoz Salinas.
 #include <vector>
 #include <chrono>
 #include <iomanip>
-#include "../Eigen/Eigen"
+#include <Eigen>
 
 using namespace Eigen;
 
@@ -194,7 +192,6 @@ void LevMarq<T>::setParams(int maxIters,double minError,double min_step_error_di
     _der_epsilon=der_epsilon;
     _tau=tau;
     _min_step_error_diff=min_step_error_diff;
-
 }
 
 

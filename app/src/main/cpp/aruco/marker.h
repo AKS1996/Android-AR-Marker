@@ -70,9 +70,6 @@ or implied, of Rafael Muñoz Salinas.
         Marker(const std::vector<cv::Point2f>& corners, int _id = -1);
         /**
          */
-        ~Marker()
-        {
-        }
         /**Indicates if this object is valid
          */
         bool isValid() const
@@ -173,7 +170,7 @@ or implied, of Rafael Muñoz Salinas.
         // returns the 3d points of a marker wrt its center
         static std::vector<cv::Point3f> get3DPoints(float msize);
         //returns the 3d points of this marker wrt its center
-          inline vector<cv::Point3f> get3DPoints()const{
+          inline std::vector<cv::Point3f> get3DPoints()const{
               return get3DPoints(ssize);
           }
 

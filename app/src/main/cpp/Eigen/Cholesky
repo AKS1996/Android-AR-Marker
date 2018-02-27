@@ -8,7 +8,7 @@
 #ifndef EIGEN_CHOLESKY_MODULE_H
 #define EIGEN_CHOLESKY_MODULE_H
 
-#include "Core.cpp"
+#include "Core"
 
 #include "src/Core/util/DisableStupidWarnings.h"
 

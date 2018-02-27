@@ -444,6 +444,4 @@ namespace aruco
          dict_info.resize(s);
         str.read((char*)&dict_info[0], dict_info.size());
     }
-
-
 }

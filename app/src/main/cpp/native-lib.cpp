@@ -30,6 +30,7 @@ void JNICALL Java_example_marker_detection_MainActivity_detectMarker(JNIEnv *env
     MarkerDetector MDetector;
     vector<Marker> Markers;
     MDetector.setDictionary("ARUCO_MIP_36h12");
+    MDetector.setDetectionMode(DM_VIDEO_FAST,1);
 
     //Ok, let's detect
     MDetector.detect(mGr, Markers);
