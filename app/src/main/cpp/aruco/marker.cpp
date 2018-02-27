@@ -286,7 +286,7 @@ namespace aruco
             cent.y /= 4;
             std::string str;
             if(writeInfo) str+= dict_info +":";
-            if(writeId)str+=std::to_string(id);
+            if(writeId)str+=id;
             cv::putText(in,str, cent,  cv::FONT_HERSHEY_SIMPLEX, std::max(0.5f, float(lineWidth) * 0.3f),
                         cv::Scalar(255 - color[0], 255 - color[1], 255 - color[2], 255), std::max(lineWidth, 2));
         }
@@ -321,7 +321,7 @@ namespace aruco
         if (camMatrix.rows == 0 || camMatrix.cols == 0)
             throw cv::Exception(9004, "CameraMatrix is empty", "calculateExtrinsics", __FILE__, __LINE__);
 
-        vector<cv::Point3f> objpoints = get3DPoints(markerSizeMeters);
+        std::vector<cv::Point3f> objpoints = get3DPoints(markerSizeMeters);
 
         cv::Mat raux, taux;
         cv::solvePnP(objpoints, *this, camMatrix, distCoeff, raux, taux);

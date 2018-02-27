@@ -28,7 +28,7 @@ or implied, of Rafael Muñoz Salinas.
 
 #ifndef ARUCO_MM__LevMarq_H
 #define ARUCO_MM__LevMarq_H
-#include <Eigen/>
+#include <Eigen/Core>
 #include <Eigen/Cholesky>
 #include <functional>
 #include <iostream>
@@ -38,6 +38,10 @@ or implied, of Rafael Muñoz Salinas.
 #include <vector>
 #include <chrono>
 #include <iomanip>
+#include "../Eigen/Eigen"
+
+using namespace Eigen;
+
 namespace aruco{
 // Levenberg-Marquardt method for general problems Inspired in
 //@MISC\{IMM2004-03215,

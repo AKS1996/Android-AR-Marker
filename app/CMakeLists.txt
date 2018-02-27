@@ -7,15 +7,8 @@ add_library( lib_opencv SHARED IMPORTED )
 set_target_properties(lib_opencv PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libopencv_java3.so)
 # OpenCV
 
-
-# Eigen
-add_library( lib_eigen SHARED
-        src/main/cpp/Eigen/Cholesky.cpp
-        src/main/cpp/Eigen/Core.cpp
-)
-target_link_libraries(lib_eigen ${log-lib})
-# Eigen
-
+## Removed inclusion of Eigen as a library, most errors gone
+##
 
 # ArUco
 add_library( lib_aruco SHARED
@@ -30,7 +23,7 @@ add_library( lib_aruco SHARED
         src/main/cpp/aruco/markermap.cpp
         src/main/cpp/aruco/posetracker.cpp
         )
-target_link_libraries(lib_aruco lib_opencv lib_eigen ${log-lib} )
+target_link_libraries(lib_aruco lib_opencv  ${log-lib} )
 # ArUco
 
 
