@@ -3,9 +3,13 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/features2d/features2d.hpp>
+#include "aruco/marker.h"
+#include "aruco/markerdetector.h"
 
 using namespace std;
 using namespace cv;
+using namespace aruco;
+
 
 extern "C"
 {
@@ -17,6 +21,23 @@ void JNICALL Java_example_marker_detection_MainActivity_salt(JNIEnv *env, jobjec
         int i = rand() % mGr.cols;
         int j = rand() % mGr.rows;
         mGr.at<uchar>(j, i) = 255;
+    }
+}
+
+void JNICALL Java_example_marker_detection_MainActivity_detectMarker(JNIEnv *env, jobject instance,
+                                                             jlong matAddrGray) {
+    Mat &mGr = *(Mat *) matAddrGray;
+    MarkerDetector MDetector;
+    vector<Marker> Markers;
+    MDetector.setDictionary("ARUCO_MIP_36h12");
+
+    //Ok, let's detect
+    MDetector.detect(mGr, Markers);
+
+    //for each marker, draw info and its boundaries in the image
+    for (auto &Marker : Markers) {
+        cout << Marker << endl;
+        Marker.draw(mGr, Scalar(0, 0, 255), 2);
     }
 }
 }

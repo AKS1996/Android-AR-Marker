@@ -1,56 +1,40 @@
-
-# Sets the minimum version of CMake required to build the native
-# library. You should either keep the default value or only pass a
-# value of 3.4.0 or lower.
-
 cmake_minimum_required(VERSION 3.4.1)
+find_library(log-lib log )
 
-# OpenCV stuff
+# OpenCV
 include_directories(/home/akshay/Projects/vision/OpenCV-android-sdk/sdk/native/jni/include)
 add_library( lib_opencv SHARED IMPORTED )
 set_target_properties(lib_opencv PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libopencv_java3.so)
-
-# Creates and names a library, sets it as either STATIC
-# or SHARED, and provides the relative paths to its source code.
-# You can define multiple libraries, and CMake builds it for you.
-# Gradle automatically packages shared libraries with your APK.
-
-add_library( # Sets the name of the library.
-             native-lib
-
-             # Sets the library as a shared library.
-             SHARED
-
-             # Provides a relative path to your source file(s).
-             # Associated headers in the same location as their source
-             # file are automatically included.
-             src/main/cpp/native-lib.cpp )
+# OpenCV
 
 
+# Eigen
+add_library( lib_eigen SHARED
+        src/main/cpp/Eigen/Cholesky.cpp
+        src/main/cpp/Eigen/Core.cpp
+)
+target_link_libraries(lib_eigen ${log-lib})
+# Eigen
 
-# Searches for a specified prebuilt library and stores the path as a
-# variable. Because system libraries are included in the search path by
-# default, you only need to specify the name of the public NDK library
-# you want to add. CMake verifies that the library exists before
-# completing its build.
 
-find_library( # Sets the name of the path variable.
-              log-lib
+# ArUco
+add_library( lib_aruco SHARED
+        src/main/cpp/aruco/cameraparameters.cpp
+        src/main/cpp/aruco/cvdrawingutils.cpp
+        src/main/cpp/aruco/debug.cpp
+        src/main/cpp/aruco/dictionary.cpp
+        src/main/cpp/aruco/ippe.cpp
+        src/main/cpp/aruco/marker.cpp
+        src/main/cpp/aruco/markerdetector.cpp
+        src/main/cpp/aruco/markerlabeler.cpp
+        src/main/cpp/aruco/markermap.cpp
+        src/main/cpp/aruco/posetracker.cpp
+        )
+target_link_libraries(lib_aruco lib_opencv lib_eigen ${log-lib} )
+# ArUco
 
-              # Specifies the name of the NDK library that
-              # you want CMake to locate.
-              log )
 
-# Specifies libraries CMake should link to your target library. You
-# can link multiple libraries, such as libraries you define in the
-# build script, prebuilt third-party libraries, or system libraries.
-
-target_link_libraries( # Specifies the target library.
-                       native-lib
-
-                       # OpenCV lib
-                       lib_opencv
-
-                       # Links the target library to the log library
-                       # included in the NDK.
-                       ${log-lib} )
+# Native Lib
+add_library(native-lib SHARED src/main/cpp/native-lib.cpp )
+target_link_libraries(native-lib lib_aruco lib_opencv ${log-lib} )
+# Native Lib
