@@ -24,7 +24,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/Eigen/src/LU                      ${CMA
 
 # ArUco
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/aruco)
-add_library( lib_aruco SHARED
+add_library( aruco SHARED
         src/main/cpp/aruco/cameraparameters.cpp
         src/main/cpp/aruco/cvdrawingutils.cpp
         src/main/cpp/aruco/debug.cpp
@@ -38,11 +38,11 @@ add_library( lib_aruco SHARED
         src/main/cpp/aruco/markerlabelers/dictionary_based.cpp
         src/main/cpp/aruco/markerlabelers/svmmarkers.cpp
         )
-target_link_libraries(lib_aruco lib_opencv  ${log-lib} )
+target_link_libraries(aruco lib_opencv  ${log-lib} )
 # ArUco
 
 
 # Native Lib
 add_library(native-lib SHARED src/main/cpp/native-lib.cpp )
-target_link_libraries(native-lib lib_aruco lib_opencv ${log-lib} )
+target_link_libraries(native-lib aruco lib_opencv ${log-lib} )
 # Native Lib
